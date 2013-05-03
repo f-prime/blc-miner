@@ -36,7 +36,12 @@ class BLCMiner:
             s.send(json.dumps({"cmd":"get_coin"}))
             data = s.recv(1024)
             if data:
-                return int(json.loads(data)['difficulty'])
+                data = json.loads(data)
+                if data['success']:
+                    return data['payload']['difficulty']
+                else:
+                    print data['message']
+                    exit()
             else:
                 return
     
@@ -50,8 +55,9 @@ class BLCMiner:
         else:
             s.send(json.dumps({"cmd":"check", "winning_string":string_, "winning_hash":hash, "addr":sys.argv[2]}))
             data = s.recv(1024)
-            if data == "True":
-                print "Mined a coin"
+            data = json.loads(data)
+            if data['success']:
+                print "Mined a coin!"
             else:
                 print "Coin is a fake!"
 
