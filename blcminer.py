@@ -69,6 +69,8 @@ class BLCMiner:
 
 if __name__ == "__main__":
     
-    for x in range(int(sys.argv[1])):
-
-        multiprocessing.Process(target=BLCMiner().main).start()
+    if sys.argv[1] and sys.argv[2]:
+        for x in range(int(sys.argv[1])):
+            multiprocessing.Process(target=BLCMiner().main).start()
+    else:
+        print "Please provide number of threads and address in the form: python blcminer.py <NUMBER OF THREADS> <YOUR ADDRESS>"
