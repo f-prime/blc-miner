@@ -46,7 +46,7 @@ class BLCMiner:
                 return
     
     def submit(self, string_, hash):
-        print "Found wining solution", string_, hash
+        print "Found winning solution", string_, hash
         s = socket.socket()
         try:
             s.connect((self.ip, self.port))
