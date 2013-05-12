@@ -11,17 +11,17 @@ class BLCMiner:
     def __init__(self):
         self.ip = "server.bloocoin.org"
         self.port = 3122
-        self.strs = string.uppercase+string.lowercase+string.digits 
+        self.strs = string.uppercase+string.lowercase+string.digits
+        self.diff = self.difficulty()
         
     def main(self):
         while True:
-            diff = self.difficulty()
             ss = self.generate()
             num = 0
-            print "Difficulty:", str(diff), "String:", ss
+            print "Difficulty:", str(self.diff), "String:", ss
             while True:
                 data = hashlib.sha512(ss+str(num)).hexdigest()
-                if data.startswith("0"*diff):
+                if data.startswith("0"*self.diff):
                     self.submit(ss+str(num), data)
                     break
                 else:
@@ -60,6 +60,7 @@ class BLCMiner:
                 print "Mined a coin!"
             else:
                 print "Coin is a fake!"
+        self.diff = self.difficulty()
 
     def generate(self):
         startstr = ""
