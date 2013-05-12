@@ -9,7 +9,7 @@ import time
 
 class BLCMiner:
     def __init__(self):
-        self.ip = "bloocoin.zapto.org"
+        self.ip = "server.bloocoin.org"
         self.port = 3122
         self.strs = string.uppercase+string.lowercase+string.digits 
         
